@@ -1,0 +1,9 @@
+{
+   "extends": "../tsconfig.base.esm.json",
+   "compilerOptions": {
+      "module": "esnext",
+      "composite": true,
+      "outDir": "../build/source",
+      "baseUrl": "./"
+   }
+}

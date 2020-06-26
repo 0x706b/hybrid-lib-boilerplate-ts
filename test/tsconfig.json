@@ -1,0 +1,10 @@
+{
+   "extends": "../tsconfig.base.esm.json",
+   "compilerOptions": {
+      "outDir": "../build/test",
+      "baseUrl": "../source"
+   },
+   "references": [
+      { "path": "../source/tsconfig.test.json" }
+   ]
+}

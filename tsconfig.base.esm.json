@@ -1,0 +1,20 @@
+{
+   "extends": "./tsconfig.base.json",
+   "compilerOptions": {
+      "module": "esnext",
+      "plugins": [
+         {
+            "transform": "@zerollup/ts-transform-paths",
+            "exclude": ["*"]
+         },
+         {
+            "transform": "@0x706b/ts-transform-esm-specifier",
+            "after": true
+         },
+         {
+            "transform": "@0x706b/ts-transform-cjs-import",
+            "after": true
+         }
+      ]
+   }
+}
