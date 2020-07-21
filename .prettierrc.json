@@ -1,3 +1,5 @@
 {
-  "tabWidth": 3
+   "tabWidth": 3,
+   "trailingComma": "none",
+   "printWidth": 100
 }

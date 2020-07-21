@@ -19,7 +19,8 @@
       "@typescript-eslint",
       "sort-imports-es6-autofix",
       "sort-keys-fix",
-      "typescript-sort-keys"
+      "typescript-sort-keys",
+      "eslint-plugin-prettier"
    ],
    "ignorePatterns": ["lib/**/*.js", "commonjs/lib/**/*.js"],
    "rules": {
@@ -62,26 +63,6 @@
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/ban-types": "off",
-      "no-param-reassign": ["error"],
-      "max-len": ["error", { "code": 150 }],
-      "indent": "off",
-      "quotes": "off",
-      "semi": ["error", "always"],
-      "comma-dangle": ["error", "never"],
-      "object-curly-spacing": ["error", "always"],
-      "array-bracket-spacing": [
-         "error",
-         "always",
-         {
-            "singleValue": false,
-            "objectsInArrays": false,
-            "arraysInArrays": false
-         }
-      ],
-      "arrow-parens": ["error", "always"],
-      "linebreak-style": 0,
-      "multiline-ternary": ["warn", "always-multiline"],
-      "multiline-comment-style": ["warn", "starred-block"],
-      "key-spacing": ["error"]
+      "no-param-reassign": ["error"]
    }
 }
