@@ -5,6 +5,7 @@
       "inlineSourceMap": true,
       "declaration": true,
       "esModuleInterop": true,
+      "strict": true,
       "lib": ["es2019"]
    }
 }
