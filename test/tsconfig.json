@@ -1,10 +1,17 @@
 {
-   "extends": "../tsconfig.base.esm.json",
+   "extends": "../tsconfig.base.json",
+   "references": [{ "path": "../source/tsconfig.test.json" }],
    "compilerOptions": {
+      "module": "commonjs",
       "outDir": "../build/test",
-      "baseUrl": "../source"
+      "baseUrl": "./",
+      "plugins": [
+         {
+            "transform": "@zerollup/ts-transform-paths",
+            "exclude": ["*"]
+         }
+      ]
    },
-   "references": [
-      { "path": "../source/tsconfig.test.json" }
-   ]
+   "include": ["../test/**/*"]
 }
+

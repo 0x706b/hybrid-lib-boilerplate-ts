@@ -1,9 +1,22 @@
 {
-   "extends": "../tsconfig.base.esm.json",
+   "extends": "./tsconfig.json",
    "compilerOptions": {
-      "module": "esnext",
-      "composite": true,
       "outDir": "../lib",
-      "baseUrl": "./"
+      "module": "esnext",
+      "plugins": [
+         {
+            "transform": "@zerollup/ts-transform-paths",
+            "exclude": ["*"]
+         },
+         {
+            "transform": "@0x706b/ts-transform-esm-specifier",
+            "after": true
+         },
+         {
+            "transform": "@0x706b/ts-transform-cjs-import",
+            "after": true
+         }
+      ]
    }
 }
+
