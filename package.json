@@ -22,11 +22,11 @@
       "build:test": "ttsc --build ./test/tsconfig.json --verbose",
       "build:esm": "ttsc --build ./source/tsconfig.esm.json --verbose",
       "build:cjs": "ttsc --build ./source/tsconfig.cjs.json --verbose",
-      "build": "yarn clean && yarn build:esm && yarn build:cjs && ts-node ./scripts/package.ts && yarn prettier",
+      "build": "yarn clean && yarn build:esm && yarn build:cjs && ts-node ./scripts/package.ts && yarn prettier && yarn sort-package-json ./dist/package.json",
       "test": "yarn clean:test && yarn build:test && jest build/test",
       "clean:test": "rimraf build",
       "clean": "rimraf dist/package.json dist/*.{js,d.ts} dist/**/*.{js,d.ts}",
-      "prettier": "prettier --config ./.prettierrc.json ./dist",
+      "prettier": "prettier --write --config ./.prettierrc.json ./dist",
       "prepublish": "yarn build",
       "debug": "nodemon --config ./nodemon-debug.json",
       "publish:package": "yarn version && yarn build && yarn publish dist"
