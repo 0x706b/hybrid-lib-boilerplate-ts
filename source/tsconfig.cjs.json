@@ -2,7 +2,7 @@
    "extends": "./tsconfig.json",
    "compilerOptions": {
       "module": "commonjs",
-      "outDir": "../commonjs/lib",
+      "outDir": "../dist/commonjs",
       "plugins": [
          {
             "transform": "@zerollup/ts-transform-paths",

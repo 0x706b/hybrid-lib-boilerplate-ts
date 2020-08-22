@@ -1,6 +1,5 @@
 {
    "extends": "../tsconfig.base.json",
-   "references": [{ "path": "../source/tsconfig.test.json" }],
    "compilerOptions": {
       "module": "commonjs",
       "outDir": "../build/test",
@@ -12,6 +11,7 @@
          }
       ]
    },
-   "include": ["../test/**/*"]
+   "include": ["../**/*"],
+   "exclude": ["../build", "../dist"]
 }
 
