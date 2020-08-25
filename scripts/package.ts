@@ -20,7 +20,7 @@ pipe(
          parseJSON(content, (err) => new Error(`json parse error: ${(err as Error).message}`))
       )
    ),
-   TE.chain((content) =>
+   TE.chain((content: any) =>
       writeFile(
          Path.resolve(process.cwd(), "dist/package.json"),
          JSON.stringify({
@@ -34,7 +34,7 @@ pipe(
                },
                "./": {
                   import: "./",
-                  require: "./commonjs"
+                  require: "./commonjs/"
                }
             },
             license: content["license"],
@@ -42,6 +42,9 @@ pipe(
             name: content["name"],
             peerDependencies: content["peerDependencies"],
             private: false,
+            publishConfig: {
+               access: "public"
+            },
             repository: content["repository"],
             type: "module",
             typings: "./index.d.ts",

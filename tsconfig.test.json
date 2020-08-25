@@ -1,0 +1,14 @@
+{
+   "compilerOptions": {
+      "outDir": "build",
+      "plugins": [
+         {
+            "exclude": ["*"],
+            "transform": "@zerollup/ts-transform-paths"
+         }
+      ],
+      "rootDir": "./"
+   },
+   "include": ["source", "test"],
+   "extends": "./tsconfig.json"
+}

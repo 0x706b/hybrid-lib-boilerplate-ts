@@ -1,0 +1,26 @@
+{
+   "extends": "./tsconfig.json",
+   "compilerOptions": {
+      "incremental": true,
+      "module": "esnext",
+      "rootDir": "source",
+      "outDir": "dist",
+      "plugins": [
+         {
+            "exclude": ["*"],
+            "transform": "@zerollup/ts-transform-paths"
+         },
+         {
+            "after": true,
+            "transform": "@0x706b/ts-transform-esm-specifier"
+         },
+         {
+            "after": true,
+            "transform": "@0x706b/ts-transform-cjs-import"
+         }
+      ],
+      "tsBuildInfoFile": "tsbuildinfo/esm.tsbuildinfo"
+   },
+   "exclude": ["build", "dist", "node_modules", "test"],
+   "include": ["source"]
+}
