@@ -4,7 +4,7 @@
       "declaration": true,
       "esModuleInterop": true,
       "inlineSourceMap": true,
-      "lib": ["es2019"],
+      "lib": ["es2020"],
       "moduleResolution": "node",
       "noEmit": false,
       "noEmitOnError": false,
@@ -14,7 +14,7 @@
       },
       "strict": true,
       "suppressImplicitAnyIndexErrors": true,
-      "target": "es2019"
+      "target": "es2020"
    },
    "exclude": ["build", "node_modules", "dist"]
 }
