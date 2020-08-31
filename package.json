@@ -34,8 +34,7 @@
    },
    "dependencies": {},
    "devDependencies": {
-      "@0x706b/ts-transform-cjs-import": "^0.1.7",
-      "@0x706b/ts-transform-esm-specifier": "^0.1.13",
+      "@0x706b/ts-transform-fix-esm": "^0.0.11",
       "@types/jest": "^26.0.10",
       "@types/node": "^14.6.0",
       "@typescript-eslint/eslint-plugin": "^3.10.0",

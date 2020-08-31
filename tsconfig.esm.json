@@ -12,11 +12,7 @@
          },
          {
             "after": true,
-            "transform": "@0x706b/ts-transform-esm-specifier"
-         },
-         {
-            "after": true,
-            "transform": "@0x706b/ts-transform-cjs-import"
+            "transform": "@0x706b/ts-transform-fix-esm"
          }
       ],
       "tsBuildInfoFile": "tsbuildinfo/esm.tsbuildinfo"

@@ -2,15 +2,12 @@
 # yarn lockfile v1
 
 
-"@0x706b/ts-transform-cjs-import@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@0x706b/ts-transform-cjs-import/-/ts-transform-cjs-import-0.1.7.tgz#2de23090f54f1bbbf63c46188f3bf3fca1ff1b0f"
-  integrity sha512-ZI6C47ZmoZvh9JHfLOKjCRuXGk/eRdWhc46ZSYVPRb2lVMipkSAjHgHKcLV+3Ywv54bNM6Xdd5HjmpyigRb0Qw==
-
-"@0x706b/ts-transform-esm-specifier@^0.1.13":
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/@0x706b/ts-transform-esm-specifier/-/ts-transform-esm-specifier-0.1.13.tgz#d5e3a6c087663209082da60964af2657fd8a5204"
-  integrity sha512-ricJTZJr2js2Beq7aIBzP7lGuVcBf3TpjDgy9B/SrYXHl+mU3vtLq722MSnUCj5IXP52bEinNcEWwVbxMdmJvQ==
+"@0x706b/ts-transform-fix-esm@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@0x706b/ts-transform-fix-esm/-/ts-transform-fix-esm-0.0.11.tgz#c6901cd3dc196ca45fd79a4e5ccdffc8877f97df"
+  integrity sha512-x+oBGQwmhs8wqGpANqL8ZTQLIBuMj/o0Ai/z9H9JFHySe8pkhvyKwT5uJFdgP+A21VQJDfPyq2T4rVs1qY/20w==
+  dependencies:
+    fp-ts "^2.8.2"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4":
   version "7.10.4"
