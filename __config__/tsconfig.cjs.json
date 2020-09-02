@@ -1,0 +1,14 @@
+{
+   "extends": "../tsconfig.json",
+   "compilerOptions": {
+      "incremental": true,
+      "target": "es2015",
+      "lib": ["es2015"],
+      "module": "commonjs",
+      "outDir": "../dist/cjs",
+      "rootDir": "../source",
+      "tsBuildInfoFile": "../tsbuildinfo/cjs.tsbuildinfo"
+   },
+   "exclude": ["../build", "../dist", "../node_modules", "../test"],
+   "include": ["../source"]
+}

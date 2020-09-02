@@ -1,0 +1,14 @@
+{
+   "extends": "../tsconfig.json",
+   "compilerOptions": {
+      "incremental": true,
+      "target": "es2020",
+      "lib": ["es2020"],
+      "module": "commonjs",
+      "outDir": "../dist/cjs-2020",
+      "rootDir": "../source",
+      "tsBuildInfoFile": "../tsbuildinfo/cjs-2020.tsbuildinfo"
+   },
+   "exclude": ["../build", "../dist", "../node_modules", "../test"],
+   "include": ["../source"]
+}

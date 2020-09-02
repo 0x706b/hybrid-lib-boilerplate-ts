@@ -1,0 +1,18 @@
+{
+   "extends": "../tsconfig.json",
+   "compilerOptions": {
+      "incremental": true,
+      "module": "esnext",
+      "rootDir": "../source",
+      "outDir": "../dist/esm-fix",
+      "plugins": [
+         {
+            "after": true,
+            "transform": "@0x706b/ts-transform-fix-esm"
+         }
+      ],
+      "tsBuildInfoFile": "../tsbuildinfo/esm-fix.tsbuildinfo"
+   },
+   "exclude": ["../build", "../dist", "../node_modules", "../test"],
+   "include": ["../source"]
+}
