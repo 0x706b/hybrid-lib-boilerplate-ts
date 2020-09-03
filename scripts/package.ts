@@ -62,15 +62,7 @@ pipe(
       )
    ),
    TE.chain(() => writeFile(
-      Path.resolve(process.cwd(), "dist/cjs-2020/package.json"),
-      cjsJSON
-   )),
-   TE.chain(() => writeFile(
       Path.resolve(process.cwd(), "dist/esm/package.json"),
-      esmJSON
-   )),
-   TE.chain(() => writeFile(
-      Path.resolve(process.cwd(), "dist/esm-2020/package.json"),
       esmJSON
    )),
    TE.chain(() => writeFile(
