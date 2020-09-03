@@ -32,14 +32,12 @@ pipe(
             description: content["description"],
             exports: {
                ".": {
-                  import: "./esm/index.js",
+                  import: "./esm-fix/index.js",
                   require: "./cjs/index.js",
-                  node: "./esm-fix/index.js"
                },
                "./": {
                   import: "./esm/",
                   require: "./cjs/",
-                  node: "./esm-fix/"
                }
             },
             license: content["license"],

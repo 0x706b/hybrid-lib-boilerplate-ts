@@ -3,8 +3,8 @@
    "compilerOptions": {
       "incremental": true,
       "module": "esnext",
-      "target": "es2015",
-      "lib": ["es2015"],
+      "target": "es2020",
+      "lib": ["es2020"],
       "rootDir": "../source",
       "outDir": "../dist/esm",
       "tsBuildInfoFile": "../tsbuildinfo/esm.tsbuildinfo"
