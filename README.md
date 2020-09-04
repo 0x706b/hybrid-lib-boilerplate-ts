@@ -7,7 +7,7 @@ We have:
 - `typescript@next` (because we're a little spicy)
   - strict mode
 - `ttypescript` (for typescript transforms)
-  - `typescript-transform-fix-esm` (my own little project for converting raw typescript imports into node-compliant ones)
+  - `ts-transform-fix-esm` (my own little project for converting raw typescript imports into node-compliant ones)
   - `@zerollup/ts-transform-paths` (converts paths from tsconfig.json)
 - `babel` (for transforming, transpiling, and polyfilling if needed)
 - `prettier`
