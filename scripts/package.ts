@@ -14,6 +14,7 @@ const writeFile = TE.taskify<fs.PathLike, string, NodeJS.ErrnoException, void>(f
 const exit = (code: 0 | 1): IO.IO<void> => () => process.exit(code);
 
 const esmJSON = JSON.stringify({ type: "module" });
+const shakeJSON = JSON.stringify({ module: "./index.js" });
 const cjsJSON = JSON.stringify({ type: "commonjs" });
 
 pipe(
@@ -30,18 +31,19 @@ pipe(
             author: content["author"],
             dependencies: content["dependencies"],
             description: content["description"],
+            sideEffects: false,
             exports: {
                ".": {
-                  import: "./esm-fix/index.js",
-                  require: "./cjs/index.js",
+                  import: "./_dist_/esm-fix/index.js",
+                  require: "./_dist_/cjs/index.js",
                },
                "./": {
-                  import: "./esm/",
-                  require: "./cjs/",
+                  import: "./_dist_/esm-fix/",
+                  require: "./_dist_/cjs/",
                }
             },
             license: content["license"],
-            main: "./cjs/index.js",
+            main: "./_dist_/cjs/index.js",
             name: content["name"],
             peerDependencies: content["peerDependencies"],
             private: false,
@@ -49,24 +51,24 @@ pipe(
                access: "public"
             },
             repository: content["repository"],
-            module: "./esm/index.js",
-            typings: "./index.d.ts",
+            module: "./_dist_/esm-shake/index.js",
+            typings: "./_dist_/index.d.ts",
             version: content["version"]
          })
       )
    ),
    TE.chain(() =>
       writeFile(
-         Path.resolve(process.cwd(), "dist/cjs/package.json"),
+         Path.resolve(process.cwd(), "dist/_dist_/cjs/package.json"),
          cjsJSON
       )
    ),
    TE.chain(() => writeFile(
-      Path.resolve(process.cwd(), "dist/esm/package.json"),
+      Path.resolve(process.cwd(), "dist/_dist_/esm-shake/package.json"),
       esmJSON
    )),
    TE.chain(() => writeFile(
-      Path.resolve(process.cwd(), "dist/esm-fix/package.json"),
+      Path.resolve(process.cwd(), "dist/_dist_/esm-fix/package.json"),
       esmJSON
    )),
    TE.fold(

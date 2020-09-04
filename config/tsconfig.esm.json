@@ -2,11 +2,12 @@
    "extends": "../tsconfig.json",
    "compilerOptions": {
       "incremental": true,
-      "module": "esnext",
+      "declaration": false,
+      "module": "es2015",
       "target": "es2020",
       "lib": ["es2020"],
       "rootDir": "../source",
-      "outDir": "../dist/esm",
+      "outDir": "../.intermediary",
       "tsBuildInfoFile": "../tsbuildinfo/esm.tsbuildinfo"
    },
    "exclude": ["../build", "../dist", "../node_modules", "../test"],

@@ -2,10 +2,16 @@
    "extends": "../tsconfig.json",
    "compilerOptions": {
       "incremental": true,
-      "module": "esnext",
+      "declaration": false,
+      "module": "es2015",
+      "target": "es2020",
       "rootDir": "../source",
-      "outDir": "../dist/esm-fix",
+      "outDir": "../dist/_dist_/esm-fix",
       "plugins": [
+         {
+            "exclude": ["*"],
+            "transform": "@zerollup/ts-transform-paths"
+         },
          {
             "after": true,
             "transform": "@0x706b/ts-transform-fix-esm"

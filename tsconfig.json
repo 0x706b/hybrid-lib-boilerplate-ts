@@ -1,8 +1,8 @@
 {
    "compilerOptions": {
       "baseUrl": ".",
+      "declaration": true,
       "esModuleInterop": true,
-      "sourceMap": true,
       "moduleResolution": "node",
       "noEmit": false,
       "noEmitOnError": false,

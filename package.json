@@ -1,30 +1,31 @@
 {
    "name": "hybrid-lib-boilerplate-ts",
    "version": "1.0.0",
-   "description": "A boilerplate project for building a hybrid (cjs/esm) TypeScript library, with both es2020 and es2015 targets",
+   "description": "A boilerplate project for building a hybrid (cjs/esm) TypeScript library, with configurable browserslist targets, and a 'fixed' ESM version for Node 14",
    "repository": "git://github.com/0x706b/hybrid-lib-boilerplate-ts",
    "license": "MIT",
    "author": "Peter Krol <peter@peterkrol.com>",
    "exports": {
       ".": {
-         "import": "./dist/index.js",
-         "require": "./dist/commonjs/index.js"
+         "import": "./dist/esm-fix/index.js",
+         "require": "./dist/cjs/index.js"
       },
       "./": {
-         "import": "./dist/",
-         "require": "./dist/commonjs/"
+         "import": "./dist/esm-fix/",
+         "require": "./dist/cjs/"
       }
    },
-   "main": "dist/index.js",
+   "module": "./dist/esm-shake/index.js",
+   "main": "dist/cjs/index.js",
    "types": "dist/index.d.ts",
    "scripts": {
       "autofix": "yarn lint --fix",
-      "build": "yarn build:esm && yarn build:cjs && yarn build:types && yarn build:postprocess",
-      "build:cjs": "ttsc --build ./__config__/tsconfig.cjs.json --verbose",
-      "build:esm": "ttsc --build ./__config__/tsconfig.esm.json --verbose && ttsc --build ./__config__/tsconfig.esm-fix.json",
-      "build:types": "ttsc --build ./__config__/tsconfig.types.json --verbose",
-      "build:postprocess": "ts-node ./scripts/package.ts && prettier --write ./dist && yarn sort-package-json ./dist/package.json",
-      "build:test": "ttsc --build ./__config__/tsconfig.test.json --verbose",
+      "build": "yarn build:types && yarn build:esm && yarn build:cjs && yarn build:postprocess",
+      "build:cjs": "babel --config-file ./config/cjs.babelrc.json --extensions '.js' --out-dir dist/_dist_/cjs .intermediary",
+      "build:esm": "ttsc --build ./config/tsconfig.esm.json && ttsc --build ./config/tsconfig.esm-fix.json && babel --config-file ./config/esm.babelrc.json --extensions '.js' --out-dir dist/_dist_/esm-shake .intermediary",
+      "build:types": "ttsc --build ./config/tsconfig.types.json --verbose",
+      "build:postprocess": "rimraf .intermediary && ts-node ./scripts/package.ts && prettier --write ./dist && yarn sort-package-json ./dist/package.json",
+      "build:test": "ttsc --build ./config/tsconfig.test.json --verbose",
       "clean": "rimraf dist build tsbuildinfo",
       "clean:test": "rimraf build",
       "format": "prettier --write ./source",
@@ -33,9 +34,16 @@
       "publish:package": "yarn version && yarn clean && yarn build && yarn publish dist",
       "test": "yarn build:test && jest build/test"
    },
-   "dependencies": {},
+   "dependencies": {
+      "core-js": "3"
+   },
    "devDependencies": {
       "@0x706b/ts-transform-fix-esm": "^0.0.11",
+      "@babel/cli": "^7.11.5",
+      "@babel/core": "^7.11.5",
+      "@babel/plugin-proposal-class-properties": "^7.10.4",
+      "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+      "@babel/preset-env": "^7.11.5",
       "@types/jest": "^26.0.13",
       "@types/node": "^14.6.3",
       "@typescript-eslint/eslint-plugin": "^4.0.1",
