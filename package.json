@@ -7,31 +7,33 @@
    "author": "Peter Krol <peter@peterkrol.com>",
    "exports": {
       ".": {
-         "import": "./dist/esm-fix/index.js",
-         "require": "./dist/cjs/index.js"
+         "import": "./dist/_dist_/esm-fix/index.js",
+         "require": "./dist/_dist_/cjs/index.js"
       },
       "./": {
-         "import": "./dist/esm-fix/",
-         "require": "./dist/cjs/"
+         "import": "./dist/_dist_/esm-fix/",
+         "require": "./dist/_dist_/cjs/"
       }
    },
-   "module": "./dist/esm-shake/index.js",
-   "main": "dist/cjs/index.js",
+   "main": "dist/_dist_/cjs/index.js",
+   "module": "./dist/_dist_/esm-shake/index.js",
    "types": "dist/index.d.ts",
    "scripts": {
       "autofix": "yarn lint --fix",
-      "build": "yarn build:types && yarn build:esm && yarn build:cjs && yarn build:postprocess",
-      "build:cjs": "babel --config-file ./config/cjs.babelrc.json --extensions '.js' --out-dir dist/_dist_/cjs .intermediary",
-      "build:esm": "ttsc --build ./config/tsconfig.esm.json && ttsc --build ./config/tsconfig.esm-fix.json && babel --config-file ./config/esm.babelrc.json --extensions '.js' --out-dir dist/_dist_/esm-shake .intermediary",
-      "build:types": "ttsc --build ./config/tsconfig.types.json --verbose",
-      "build:postprocess": "rimraf .intermediary && ts-node ./scripts/package.ts && prettier --write ./dist && yarn sort-package-json ./dist/package.json",
+      "build": "yarn build:types && yarn build:esm-fix && yarn build:intermediary && yarn build:esm-shake && yarn build:cjs && yarn build:postprocess",
+      "build:intermediary": "ttsc --build ./config/tsconfig.intermediary.json",
+      "build:cjs": "babel --config-file ./config/cjs.babelrc.json --extensions '.js' --source-maps true --out-dir dist/_dist_/cjs dist/_dist_/.intermediary",
+      "build:esm-shake": "babel --config-file ./config/esm.babelrc.json --extensions '.js' --source-maps true --out-dir dist/_dist_/esm-shake dist/_dist_/.intermediary",
+      "build:esm-fix": "ttsc --build ./config/tsconfig.esm-fix.json",
+      "build:postprocess": "ts-node ./scripts/rewrite-source-maps.ts && ts-node ./scripts/package.ts && rimraf dist/_dist_/.intermediary && prettier --write ./dist && yarn sort-package-json ./dist/package.json",
       "build:test": "ttsc --build ./config/tsconfig.test.json --verbose",
+      "build:types": "ttsc --build ./config/tsconfig.types.json --verbose",
       "clean": "rimraf dist build tsbuildinfo",
       "clean:test": "rimraf build",
       "format": "prettier --write ./source",
       "lint": "eslint .",
       "prepublish": "yarn build",
-      "publish:package": "yarn version && yarn clean && yarn build && yarn publish dist",
+      "publish:package": "yarn version --no-git-tag-version && yarn clean && yarn build && yarn publish --no-git-tag-version dist",
       "test": "yarn build:test && jest build/test"
    },
    "dependencies": {
@@ -41,14 +43,15 @@
       "@0x706b/ts-transform-fix-esm": "^0.0.11",
       "@babel/cli": "^7.11.5",
       "@babel/core": "^7.11.5",
-      "@babel/plugin-proposal-class-properties": "^7.10.4",
-      "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
       "@babel/preset-env": "^7.11.5",
+      "@types/cpx": "^1.5.1",
       "@types/jest": "^26.0.13",
       "@types/node": "^14.6.3",
       "@typescript-eslint/eslint-plugin": "^4.0.1",
       "@typescript-eslint/parser": "^4.0.1",
       "@zerollup/ts-transform-paths": "^1.7.18",
+      "chalk": "^4.1.0",
+      "cpx": "^1.5.0",
       "eslint": "^7.8.1",
       "eslint-config-prettier": "^6.11.0",
       "eslint-import-resolver-typescript": "^2.3.0",
@@ -58,6 +61,7 @@
       "eslint-plugin-sort-keys-fix": "^1.1.1",
       "eslint-plugin-typescript-sort-keys": "^1.3.0",
       "fp-ts": "^2.8.2",
+      "glob": "^7.1.6",
       "jest": "^26.4.2",
       "prettier": "^2.1.1",
       "rimraf": "^3.0.2",

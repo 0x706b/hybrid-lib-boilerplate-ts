@@ -8,5 +8,7 @@
             "corejs": 3
          }
       ]
-   ]
+   ],
+   "sourceMap": true,
+   "inputSourceMap": true
 }

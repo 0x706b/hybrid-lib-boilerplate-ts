@@ -6,10 +6,8 @@ import * as fs from "fs";
 import { log } from "fp-ts/lib/Console";
 import { parseJSON } from "fp-ts/lib/Either";
 import { pipe } from "fp-ts/lib/function";
-
-const readFile = TE.taskify<fs.PathLike, string, NodeJS.ErrnoException, string>(fs.readFile);
-
-const writeFile = TE.taskify<fs.PathLike, string, NodeJS.ErrnoException, void>(fs.writeFile);
+import { onLeft, onRight, readFile, writeFile } from "./common";
+import chalk from "chalk";
 
 const exit = (code: 0 | 1): IO.IO<void> => () => process.exit(code);
 
@@ -35,11 +33,11 @@ pipe(
             exports: {
                ".": {
                   import: "./_dist_/esm-fix/index.js",
-                  require: "./_dist_/cjs/index.js",
+                  require: "./_dist_/cjs/index.js"
                },
                "./": {
                   import: "./_dist_/esm-fix/",
-                  require: "./_dist_/cjs/",
+                  require: "./_dist_/cjs/"
                }
             },
             license: content["license"],
@@ -57,28 +55,15 @@ pipe(
          })
       )
    ),
+   TE.chain(() => writeFile(Path.resolve(process.cwd(), "dist/_dist_/cjs/package.json"), cjsJSON)),
    TE.chain(() =>
-      writeFile(
-         Path.resolve(process.cwd(), "dist/_dist_/cjs/package.json"),
-         cjsJSON
-      )
+      writeFile(Path.resolve(process.cwd(), "dist/_dist_/esm-shake/package.json"), esmJSON)
    ),
-   TE.chain(() => writeFile(
-      Path.resolve(process.cwd(), "dist/_dist_/esm-shake/package.json"),
-      esmJSON
-   )),
-   TE.chain(() => writeFile(
-      Path.resolve(process.cwd(), "dist/_dist_/esm-fix/package.json"),
-      esmJSON
-   )),
+   TE.chain(() =>
+      writeFile(Path.resolve(process.cwd(), "dist/_dist_/esm-fix/package.json"), esmJSON)
+   ),
    TE.fold(
-      (err) =>
-         T.fromIO(
-            pipe(
-               log(err),
-               IO.chain(() => exit(1))
-            )
-         ),
-      () => T.fromIO(log("package copy succeeded!"))
+      onLeft,
+      onRight("Package copy succeeded!")
    )
-)().catch((e) => console.log(`unexpected error ${e}`));
+)().catch((e) => console.log(chalk.red.bold(`unexpected error ${e}`)));
